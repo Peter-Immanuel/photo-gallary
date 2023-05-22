@@ -49,6 +49,9 @@ window.onmousemove = e => {
         var nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage
     }
 
+    nextPercentage = Math.min(nextPercentage, 0);
+    nextPercentage = Math.max(nextPercentage, -100);
+
     track.dataset.percentage = nextPercentage
     
     track.style.transform = `translate(${nextPercentage}%, -50% )`
