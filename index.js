@@ -49,13 +49,14 @@ window.onmousemove = e => {
         var nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage
     }
 
+
+    // Set maximum and minimum values for scroller
     nextPercentage = Math.min(nextPercentage, 0);
     nextPercentage = Math.max(nextPercentage, -100);
 
     track.dataset.percentage = nextPercentage
     
     track.style.transform = `translate(${nextPercentage}%, -50% )`
-    // track.style.transform= `translate(${percentage}%, -50% )`
 
     console.log(mouseDelta)
     console.log(maxDelta)
@@ -66,6 +67,23 @@ window.onmousemove = e => {
         // {transform: `translate(${percentage}%, -50%)`},
         {duration:1200, fill:"forwards"}
     )
+
+    // for (const image of track.gtElementsByClassName("visible-image")) {
+    //     console.log(image)
+    //     image.animate(
+    //         {objectPosition:`${100 + nextPercentage}%, center`},
+    //         {duration: 1200, fill: forwards}
+    //         )
+    // }
+
+    var image_list = Array.from(document.getElementsByClassName("visible-image"))
+
+    image_list.forEach(element => {
+        element.animate(
+            {objectPosition:`${parseInt(100 + nextPercentage)}% 50%`},
+            {duration: 1200, fill: "forwards"}
+        )
+    });
 }
 
 window.onmouseup = () => {
@@ -76,11 +94,10 @@ window.onmouseup = () => {
     console.log(track.dataset.percentage)
 }
 
-
-// for (const image of track.gtElementsByClassName("image")) {
+// for (const image of track.gtElementsByClassName("visible-image")) {
+//     console.log(image)
 //     image.animate(
 //         {objectPosition:`${100 + nextPercentage}%, center`},
 //         {duration: 1200, fill: forwards}
 //     )
-//     image.style.objectPosition = `${nextPercentage + 100 }, 50%`
 // }
