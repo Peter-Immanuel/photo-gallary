@@ -50,7 +50,7 @@ function fetchImages() {
         
         body: JSON.stringify({
             query: `query GetAlbumDetails {
-                getAlbumDetails(eventId: 395) {
+                getAlbumDetails(eventId: 395, page: 1, pageSize: 200) {
                     id
                     name
                     url
@@ -64,14 +64,9 @@ function fetchImages() {
         .then(response => response.json())
         .then(data => {
             data.data.getAlbumDetails.forEach(element => {
-                pictures.push(element.url)
-            })
-
-
-            // append image to track
-            pictures.forEach(element => {
+                // pictures.push(element.url)
                 imageElement = document.createElement("img")
-                imageElement.src = element
+                imageElement.src = element.url
                 imageElement.classList.add("visible-image")
                 imageElement.draggable=false
 
@@ -79,6 +74,12 @@ function fetchImages() {
                 // imageElement.addEventListener('onmousewheel', exitFullScreenImage());
                 track.appendChild(imageElement)
             })
+
+
+            // // append image to track
+            // pictures.forEach(element => {
+                
+            // })
 
             hideLoader()
         })
@@ -91,14 +92,9 @@ function fetchImages() {
 
 // System Algorithm
 
-// Show loader
-// showLoader();
-
 // Make GraphQL query and load images before removing loader 
 fetchImages()
 
-// setTimeout(hideLoader, 5000)
-// hideLoader()
 
 
 

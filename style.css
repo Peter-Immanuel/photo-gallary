@@ -47,7 +47,6 @@ body{
 
 #image-container {
     display: flex;
-    display: flex;
     gap: 4vmin;
     position: absolute;
     top: 50%;
